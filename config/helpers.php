@@ -20,7 +20,9 @@ function js_url($js) {
     return BASE_URL . '/public/assets/js' . $js;
 }
 
-function public_url($url) {}
+function public_url($url) {
+    return BASE_URL . '/public' . $url;
+}
 
 
 function view($path, $vars = null, $include = true) {

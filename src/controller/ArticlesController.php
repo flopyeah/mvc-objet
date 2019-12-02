@@ -5,6 +5,21 @@ class ArticlesController {
 
     public function add() {
 
+        $article = new Article(8);
+
+        
+
+        var_dump($article);
+        var_dump($article->setTitle('florian'));
+
+        
+        $article = new Article();
+
+        
+
+        var_dump($article);
+        var_dump($article->setTitle('florian'));
+
         view('articles.add');
     }
 
@@ -19,14 +34,24 @@ class ArticlesController {
 
     }
 
-    public function show($id) {
+    public function show($id, $slug) {
+
+        echo $id;
+        echo $slug;
+
+        $articles = Article::findAll();
+        
+        view('articles.index', compact('articles'));
+    }
+
+    public function showId($id) {
 
         echo $id;
 
-        $article = Article::findAll();
+        $articles = Article::findAll();
         $var = 'var 2';
         
-        view('articles.index', compact('article', 'var'));
-        //echo "Affichage de l'article";
+        view('articles.index', compact('articles', 'var'));
     }
+    
 }

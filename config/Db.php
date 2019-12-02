@@ -2,6 +2,12 @@
 
 class Db {
 
+    private const DB_HOST = 'localhost';
+    private const DB_PORT = '3306';
+    private const DB_NAME = 'mvc_blog';
+    private const DB_USER = 'root';
+    private const DB_PWD  = '';
+
     public function __construct() { 
 
     }
@@ -9,7 +15,7 @@ class Db {
     protected static function getDb() {
         try {
             // Essaie de faire ce script...
-            $bdd = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8;port='.DB_PORT, DB_USER, DB_PWD);
+            $bdd = new PDO('mysql:host='.self::DB_HOST.';dbname='.self::DB_NAME.';charset=utf8;port='.self::DB_PORT, self::DB_USER, self::DB_PWD);
         }
         catch (Exception $e) {
             // Sinon, capture l'erreur et affiche la
@@ -71,70 +77,11 @@ class Db {
 
         $response = $bdd->prepare($req);
 
-        $response->execute($data);
+        $delete = $response->execute($data);
 
-        return;
+        return $delete;
     }
 
-    /**
-     * Permet de récupérer (SELECT) des données en base de données.
-     * @param string    $table  Nom de la table dans lequel faire un SELECT
-     * @param array     $request   Array contenant une liste de trios ["champ", "opérateur", "valeur"].
-     * 
-     * @return array    Données demandées.
-     * 
-     * Exemple: 
-     * $table = "Movie";
-     * $request = [
-     *      [ 'title', "like",'Rocky' ],
-     *      [ 'realease_date', '>', '2000-01-01']
-     * ];
-     */
-    protected static function dbFind(string $table, array $request = null) {
-
-        $bdd = self::getDb();
-
-        $req = "SELECT * FROM " . $table;
-
-        if (isset($request)) {
-
-            $req .= " WHERE ";
-
-            $reqOrder = '';
-
-            foreach($request as $r) {
-
-                switch($r[0]):
-
-                    case "orderBy":
-                        $reqOrder = " ORDER BY `" . htmlspecialchars($r[1]) . "` " . htmlspecialchars($r[2]);
-                        break;
-                    
-                    default:
-                        $req .= "`". htmlspecialchars($r[0]) . "` " . htmlspecialchars($r[1]) . " '" . htmlspecialchars($r[2]) . "'";
-                        $req .= " AND ";
-
-                endswitch;
-                
-            }
-
-            $req = substr($req, 0, -5);
-            $req .= $reqOrder;
-
-        }
-
-        $response = $bdd->query($req);
-
-        $data = [];
-
-        while ($donnees = $response->fetch()) {
-            $data[] = $donnees;
-        }
-
-
-        return $data;
-
-    }
 
     /**
      * Permet de mettre à jour (UPDATE) des données en base de données.

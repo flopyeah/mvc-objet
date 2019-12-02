@@ -6,8 +6,9 @@ class PagesController {
 
     public function home() {
 
-        view('pages.home');
+        $article = Article::findAll();
 
+        return view('pages.home', compact('article'));
     }
 
     public function about($id) {
