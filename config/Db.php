@@ -4,9 +4,9 @@ class Db {
 
     private const DB_HOST = 'localhost';
     private const DB_PORT = '3306';
-    private const DB_NAME = 'mvc_blog';
+    private const DB_NAME = 'video_games';
     private const DB_USER = 'root';
-    private const DB_PWD  = '';
+    private const DB_PWD  = 'root';
 
     public function __construct() { 
 
@@ -100,7 +100,7 @@ class Db {
      *      'description'   => 'Ma nouvelle catégorie.',
      * ];
      */
-    protected static function dbUpdate(string $table, array $data, string $idField = null) {
+    protected static function dbUpdate(string $table, array $data, array $idField ) {
 
         $bdd = self::getDb();
 
@@ -112,16 +112,19 @@ class Db {
          * Set du WHERE
          */
 
-        $whereIdString = ($idField !== null) ? " WHERE `" . $idField . "` = :" . $idField : " WHERE id = :id";
+        foreach($idField as $key => $value) {
+
+            $whereIdString = " WHERE `" . $key . "` = :" . $key;
+
+        }
+        //$whereIdString = ($idField !== null) ? " WHERE `" . $idField . "` = :" . $idField : " WHERE id = :id";
 
         /**
          * Set des key = :value
          */
         foreach($data as $key => $value) {
-            
-            if ($key !== 'id') {
+
                 $req .= "`" . $key . "` = :" . $key . ", ";
-            }
 
         }
 
@@ -130,8 +133,9 @@ class Db {
 
         $response = $bdd->prepare($req);
 
-        $response->execute($data);
+        $response->execute(array_merge($data, $idField));
 
         return $bdd->lastInsertId();
     }
+
 }

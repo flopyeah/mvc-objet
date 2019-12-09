@@ -90,7 +90,6 @@ class_alias('\Bramus\Router\Router', 'Router');
 
 Constantes de configuration du projet :
 
-- Configuration PHP du projet si besoin (`ini_set`)
 - Constantes pour les credentials de la base de données
 
 - le titre du site, pour l'afficher sur toutes les pages et l'éditer ici facilement.
@@ -99,16 +98,15 @@ Constantes de configuration du projet :
 
 - la liste des dossiers contenant potentiellement des classes
 ```php
-ini_set('allow_url_include', 1);
 
 const DB_HOST = 'localhost';
 const DB_PORT = '3306';
-const DB_NAME = 'videoclub';
+const DB_NAME = 'video_games';
 const DB_USER = 'root';
 const DB_PWD  = '';
 
 const WEBSITE_TITLE = "Mon nouveau site en MVC";
-const BASE_URL = "localhost/videoclub";
+const BASE_URL = "localhost/video_games";
 
 const CLASSES_SOURCES = [
     'src/controller',
@@ -158,7 +156,7 @@ Par exemple : si le client va sur l'url `localhost/project/articles`, le routeur
 
 > ** Note importante : ** Dans quel controller mettre les méthodes pour les pages qui ne sont pas relatives à une table ? Les pages `À propos`, `FAQ`, `Accueil`, `Contact` par exemple ? Vous pouvez les mettre dans un controller à part, nommé `PagesController` par exemple.
 
-> Bien sûr, veillez à ne pas avoir de table nommée `Page` en base de données ;)
+> Bien sûr, veillez à ne pas avoir de table nommée `Page` en base de données 
 
 Le contrôleur est en fait une classe, contenant plusieurs méthodes publiques. Pour le moment, on retiendra d'une classe que c'est un containeur qui possède des fonctions (les `méthodes`) et des variables (les `attributs`) qui lui sont propres.
 

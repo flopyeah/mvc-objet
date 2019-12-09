@@ -1,22 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  lun. 02 déc. 2019 à 17:44
--- Version du serveur :  10.4.8-MariaDB
--- Version de PHP :  7.3.11
+-- Hôte : localhost:8889
+-- Généré le :  lun. 09 déc. 2019 à 06:54
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `video_games`
@@ -1368,7 +1360,7 @@ INSERT INTO `plateforme` (`p_id`, `p_nom`, `p_slug`, `p_image`) VALUES
 (4, 'PC', 'pc', 'https://media.rawg.io/media/games/88c/88c5b4d7c80276c03ff62aebb1a99ad4.jpg'),
 (5, 'macOS', 'macos', 'https://media.rawg.io/media/games/55e/55ee6432ac2bf224610fa17e4c652107.jpg'),
 (6, 'Linux', 'linux', 'https://media.rawg.io/media/games/7a2/7a2500ee8b2c0e1ff268bb4479463dea.jpg'),
-(7, 'Nintendo Switch', 'nintendo-switch', 'https://media.rawg.io/media/games/d1f/d1f872a48286b6b751670817d5c1e1be.jpg'),
+(7, 'New old Nintendo Switch ', 'new-old-nintendo-switch', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nintendo-Switch-Console-Docked-wJoyConRB.jpg/2880px-Nintendo-Switch-Console-Docked-wJoyConRB.jpg'),
 (8, 'Nintendo 3DS', 'nintendo-3ds', 'https://media.rawg.io/media/screenshots/b7b/b7b2c1c2ffb15a99201c2d57b0de04bc.jpg'),
 (9, 'Nintendo DS', 'nintendo-ds', 'https://media.rawg.io/media/screenshots/d4d/d4d473eaed307b16bdffcb44fc2a3019.jpg'),
 (10, 'Wii U', 'wii-u', 'https://media.rawg.io/media/games/b4e/b4e4c73d5aa4ec66bbf75375c4847a2b.jpg'),
@@ -1427,15 +1419,13 @@ ALTER TABLE `genre`
 -- Index pour la table `jeuvideo`
 --
 ALTER TABLE `jeuvideo`
-  ADD PRIMARY KEY (`jv_id`),
-  ADD KEY `fk_genre_id` (`genre_id`);
+  ADD PRIMARY KEY (`jv_id`);
 
 --
 -- Index pour la table `jeuvideo_media`
 --
 ALTER TABLE `jeuvideo_media`
-  ADD PRIMARY KEY (`jvm_id`),
-  ADD KEY `fk_jv_id` (`jeuvideo_id`);
+  ADD PRIMARY KEY (`jvm_id`);
 
 --
 -- Index pour la table `jeuvideo_plateforme`
@@ -1454,6 +1444,18 @@ ALTER TABLE `plateforme`
 --
 
 --
+-- AUTO_INCREMENT pour la table `genre`
+--
+ALTER TABLE `genre`
+  MODIFY `g_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT pour la table `jeuvideo`
+--
+ALTER TABLE `jeuvideo`
+  MODIFY `jv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=343608;
+
+--
 -- AUTO_INCREMENT pour la table `jeuvideo_media`
 --
 ALTER TABLE `jeuvideo_media`
@@ -1466,22 +1468,7 @@ ALTER TABLE `jeuvideo_plateforme`
   MODIFY `jvp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=437;
 
 --
--- Contraintes pour les tables déchargées
+-- AUTO_INCREMENT pour la table `plateforme`
 --
-
---
--- Contraintes pour la table `jeuvideo`
---
-ALTER TABLE `jeuvideo`
-  ADD CONSTRAINT `fk_genre_id` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`g_id`);
-
---
--- Contraintes pour la table `jeuvideo_media`
---
-ALTER TABLE `jeuvideo_media`
-  ADD CONSTRAINT `fk_jv_id` FOREIGN KEY (`jeuvideo_id`) REFERENCES `jeuvideo` (`jv_id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `plateforme`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;

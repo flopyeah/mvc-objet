@@ -6,22 +6,21 @@ $router = new Router();
 // example.com
 $router->get('', 'PagesController@home' );
 
-// example.com/about
-$router->get('about', 'PagesController@about');
+// example.com/a-propos
+$router->get('a-propos', 'PagesController@about');
+$router->get('contact', 'PagesController@contact');
+// reception des données 
+$router->post('contact', 'PagesController@contact');
 
-$router->get('contactez-nous', 'PagesController@contact');
-$router->post('contactez-nous', 'PagesController@traitementForm');
+// pages Plateforme
+$router->get('plateformes', 'PlateformesController@all');
+$router->get('plateforme/update/{id}', 'PlateformesController@update');
+$router->post('plateforme/update/{id}', 'PlateformesController@update');
+$router->get('plateforme/add', 'PlateformesController@add');
+$router->post('plateforme/add', 'PlateformesController@add');
 
-// pages article
-$router->get('ajouter-article', 'ArticlesController@add');
-$router->post('ajouter-article', 'ArticlesController@save');
-
-// exemple.com/article/12/lorem-ipsum-dolor
-$router->get('article/{id}/{slug}',    'ArticlesController@show');
-// exemple.com/article/12
-$router->get('article/{id}',    'ArticlesController@showId');
-
-
+// exemple.com/plateforme/12/lorem-ipsum-dolor
+$router->get('plateforme/{id}/{slug}',    'PlateformesController@show');
 
 // page 404
 $router->set404('PagesController@page404');

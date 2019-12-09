@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /**
  * Composer Autoload
@@ -12,6 +13,7 @@ require 'config/aliases.php';
 require 'config/config.php';
 require 'config/helpers.php';
 require 'config/Db.php';
+require 'config/classes/form.class.php';
 
 /**
  * Autoload Classes

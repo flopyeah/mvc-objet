@@ -6,9 +6,9 @@ class PagesController {
 
     public function home() {
 
-        $article = Article::findAll();
+        $plateformes = Plateforme::findAll();
 
-        return view('pages.home', compact('article'));
+        view('pages.home', compact('plateformes'));
     }
 
     public function about($id) {
@@ -18,14 +18,35 @@ class PagesController {
 
     public function contact() {
 
-        view('pages.contact');
+        $form = new Form($_POST);
 
-    }
+        $form->input("radio", 'civilite', 'Civilité', [1=>'M', 2=>'Mme', 3=>'Mlle'])->required()
+            ->input('text', "nom", "Nom")->required()
+            ->input('text', "prenom", "Prénom")->required()
+            ->input('text', "email", "E-mail")->required()
+            ->input('textarea', "message", "Message")->required()
+            ->submit('enregistrer');
 
-    public function traitementForm() {
+        $formulaireHtml = $form->getForm();
 
-        var_dump($_POST);
+        $formValid  = false;
+        $errors     = false; 
 
+        // si le formulaire est validé 
+        if($data = $form->valid()){
+
+            // formulaire valide
+            $formValid = true;
+
+            // ENregistrement des données
+
+        } else {
+            // affichage des erreurs 
+            $errors =  $form->displayErrors();
+        }
+
+        // vue de la page contact 
+        view('pages.contact', compact('formulaireHtml', 'formValid', 'errors'));
     }
     
     public function page404() {
